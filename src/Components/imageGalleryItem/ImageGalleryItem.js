@@ -18,7 +18,11 @@ const ImageGalleryItem = ({ item, openModal, modalImage }) => {
 export default ImageGalleryItem;
 
 ImageGalleryItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    tags: PropTypes.string.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+  }).isRequired,
   openModal: PropTypes.func.isRequired,
   modalImage: PropTypes.string.isRequired,
 };

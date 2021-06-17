@@ -11,11 +11,12 @@ class App extends Component {
   state = {
     hits: [],
     error: null,
-    loading: true,
+    loading: false,
     page: 1,
     isModalOpen: false,
     modalImage: "",
   };
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.search !== this.state.search ||
@@ -38,25 +39,23 @@ class App extends Component {
         hits: [...prevState.hits, ...data.hits],
       }));
     } catch (error) {
-      this.setState({ error: error.response.hits });
+      this.setState({ error: "Something went wrong. Try again." });
     } finally {
+      this.setState({ loading: false });
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth",
       });
-      this.setState({ loading: false });
     }
   };
 
   openModal = (modalImage) => {
     this.setState({ isModalOpen: true, modalImage });
-    window.addEventListener("keydown", this.closeModal);
   };
 
   closeModal = (evt) => {
     if (evt.target === evt.currentTarget || evt.key === "Escape")
       this.setState({ isModalOpen: false });
-    window.removeEventListener("keydown", this.closeModal);
   };
 
   handleSubmit = (search) => {

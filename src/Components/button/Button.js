@@ -6,7 +6,7 @@ const Button = ({ onClick }) => {
   return (
     <>
       <button type="button" onClick={onClick} className={styles.button}>
-        <span>loade more</span>
+        loade more
       </button>
     </>
   );
